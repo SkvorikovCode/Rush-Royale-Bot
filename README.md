@@ -1,154 +1,218 @@
-# RushBot 🎮🤖
+# Rush Royale Bot - macOS Edition
 
-| <img width="1024" height="1024" alt="20250803_2330_RushBot App Logo_simple_compose_01k1rxd9atf21b3v5gkrpyxt0f" src="https://github.com/user-attachments/assets/621d866c-864e-42bb-a28a-c8dca66425a0" /> | RushBot is an advanced Python 3.13-based automation bot for Rush Royale that combines computer vision, machine learning, and Android device control. Using OpenCV for real-time game state recognition and scikit-learn for strategic decision-making, the bot can autonomously play Rush Royale on Android devices or emulators. Built with a robust architecture featuring ADB integration for device communication, advanced screenshot processing, and comprehensive analytics tracking, RushBot represents the evolution of Rush Royale automation - building upon the foundational work of AxelBjork, mleem97, and Frikadellental's previous implementations while pushing the boundaries with modern AI techniques and reliable cross-platform compatibility. |
-|------|-------------|
+Современное Electron + React приложение для автоматизации игры Rush Royale на macOS.
 
-## 🔗 Project History & Related Work
+## 🚀 Быстрый старт
 
-This project builds upon the foundation of several Rush Royale bot implementations:
-- **Original Project**: [AxelBjork/Rush-Royale-Bot](https://github.com/AxelBjork/Rush-Royale-Bot) - The pioneering work that started it all
-- **Fixed Version**: [mleem97/Rush-Royale-Bot](https://github.com/mleem97/Rush-Royale-Bot) - Improved stability and bug fixes
-- **AI Redesign**: [Frikadellental/Rush-Royale-AI](https://github.com/Frikadellental/Rush-Royale-AI) - Complete redesign with modern AI approaches
+### Требования
 
-This repository represents the next evolution, focusing on advanced reinforcement learning techniques and autonomous gameplay.
+- **Node.js** 18+ (рекомендуется 20+)
+- **Python** 3.8+ для backend
+- **Android Debug Bridge (ADB)** для подключения к Android устройствам
+- **macOS** 10.15+ (Catalina или новее)
 
-## 🚀 Features
+### Установка
 
-- **Computer Vision Integration**: Advanced OpenCV-based image recognition for game state analysis
-- **Android Device Control**: Direct communication with Android devices via ADB
-- **Machine Learning Analytics**: Scikit-learn powered pattern recognition and decision making
-- **Real-time Screenshot Processing**: Fast image capture and analysis pipeline
-- **Data-Driven Insights**: Comprehensive gameplay analytics and performance tracking
-- **Cross-Platform Compatibility**: Works with Android emulators (physical devices are not tested yet)
-- **Development Tools**: Jupyter notebook integration for analysis and debugging
+1. **Клонируйте репозиторий:**
+   ```bash
+   git clone <repository-url>
+   cd Rush-Royale-Bot
+   ```
 
-## 🏗️ Architecture
+2. **Установите Node.js зависимости:**
+   ```bash
+   pnpm install
+   # или
+   npm install
+   ```
 
-### Computer Vision Pipeline
-- **OpenCV Integration**: Advanced image processing for game state recognition
-- **Template Matching**: Precise identification of game elements and UI components
-- **Color Analysis**: Strategic decision making based on visual game information
-- **Screenshot Processing**: Optimized real-time image capture and analysis
+3. **Установите Python зависимости:**
+   ```bash
+   cd backend
+   pip install -r requirements.txt
+   cd ..
+   ```
 
-### Machine Learning Components
-- **Scikit-learn Models**: Pattern recognition for optimal gameplay strategies  
-- **Data Analytics**: Performance tracking and strategic improvement recommendations
-- **Feature Extraction**: Automated identification of key game state indicators
+4. **Установите ADB (если не установлен):**
+   ```bash
+   brew install android-platform-tools
+   ```
 
-### Device Communication
-- **ADB Integration**: Direct Android device control and automation
-- **Cross-Platform Support**: Compatible with emulators and physical devices
-- **Reliable Input Simulation**: Precise touch and gesture automation
+### Запуск в режиме разработки
 
-## 📋 Requirements
+1. **Запустите все сервисы одновременно:**
+   ```bash
+   pnpm dev
+   ```
 
-- Python 3.13+
-- OpenCV 4.10+
-- NumPy 1.24+
-- Pandas 2.0+
-- Scikit-learn 1.5+
-- Pure Python ADB
-- Pillow 10.0+
-- Matplotlib 3.7+
+   Или запустите каждый сервис отдельно:
 
-## 🛠️ Installation
+2. **Frontend (React + Vite):**
+   ```bash
+   pnpm dev:frontend
+   ```
 
-1. Clone the repository:
+3. **Backend (Python FastAPI):**
+   ```bash
+   pnpm dev:backend
+   ```
+
+4. **Electron приложение:**
+   ```bash
+   pnpm dev:electron
+   ```
+
+### Сборка для продакшена
+
+1. **Сборка всего проекта:**
+   ```bash
+   pnpm build
+   ```
+
+2. **Создание macOS приложения:**
+   ```bash
+   pnpm dist
+   ```
+
+3. **Создание DMG для распространения:**
+   ```bash
+   pnpm dist:mac
+   ```
+
+## 📁 Структура проекта
+
+```
+Rush-Royale-Bot/
+├── frontend/                 # React приложение
+│   ├── src/
+│   │   ├── components/      # React компоненты
+│   │   ├── pages/          # Страницы приложения
+│   │   ├── hooks/          # Custom React hooks
+│   │   ├── lib/            # Утилиты и библиотеки
+│   │   └── assets/         # Статические ресурсы
+│   └── index.html
+├── electron/                # Electron главный процесс
+│   ├── main.ts            # Главный файл Electron
+│   └── preload.ts         # Preload скрипт
+├── backend/                 # Python FastAPI backend
+│   ├── app/
+│   │   ├── api/           # API роуты
+│   │   ├── core/          # Основная логика бота
+│   │   ├── services/      # Сервисы (устройства, и т.д.)
+│   │   └── main.py        # FastAPI приложение
+│   ├── requirements.txt
+│   └── start.py
+├── shared/                  # Общие типы и константы
+│   ├── types.ts
+│   └── constants.ts
+├── build/                   # Ресурсы для сборки
+│   └── icons/
+└── dist/                    # Собранные файлы
+```
+
+## 🔧 Конфигурация
+
+### Настройка ADB
+
+1. Включите "Отладку по USB" на Android устройстве
+2. Подключите устройство к Mac через USB
+3. Разрешите отладку при появлении диалога
+4. Проверьте подключение:
+   ```bash
+   adb devices
+   ```
+
+### Переменные окружения
+
+Создайте файл `.env` в корне проекта:
+
+```env
+# Backend
+HOST=127.0.0.1
+PORT=8000
+RELOAD=true
+
+# Frontend
+VITE_API_URL=http://localhost:8000
+VITE_WS_URL=ws://localhost:8000/ws
+```
+
+## 🎮 Использование
+
+1. **Запустите приложение**
+2. **Подключите Android устройство** через USB
+3. **Просканируйте устройства** в разделе "Devices"
+4. **Настройте бота** в разделе "Bot Settings"
+5. **Запустите сессию бота** для выбранного устройства
+
+## 🛠 Разработка
+
+### Доступные команды
+
 ```bash
-git clone https://github.com/yourusername/rushbot.git
-cd rushbot
+# Разработка
+pnpm dev                    # Запуск всех сервисов
+pnpm dev:frontend          # Только frontend
+pnpm dev:backend           # Только backend
+pnpm dev:electron          # Только Electron
+
+# Сборка
+pnpm build                 # Сборка всего проекта
+pnpm build:frontend        # Сборка frontend
+pnpm build:electron        # Сборка Electron
+
+# Дистрибуция
+pnpm dist                  # Создание приложения
+pnpm dist:mac              # macOS DMG
+pnpm dist:mas              # Mac App Store
+
+# Утилиты
+pnpm lint                  # Проверка кода
+pnpm type-check            # Проверка типов
+pnpm clean                 # Очистка
 ```
 
-2. Create a virtual environment:
-```bash
-python -m venv rushbot_env
-source rushbot_env/bin/activate  # On Windows: rushbot_env\Scripts\activate
-```
+### Архитектура
 
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+- **Frontend**: React 18 + TypeScript + Tailwind CSS + Zustand
+- **Backend**: Python FastAPI + WebSockets + OpenCV
+- **Desktop**: Electron 28 с нативной интеграцией macOS
+- **Коммуникация**: REST API + WebSockets для real-time обновлений
 
-## 🎯 Usage
+### Особенности macOS
 
-### Training the Bot
-```bash
-python main.py --mode train --device emulator-5554
-```
+- **Нативное меню** в строке меню macOS
+- **Жесты трекпада** для управления
+- **Уведомления** через Notification Center
+- **Интеграция с Dock** и системным треем
+- **Автоматические обновления** через electron-updater
 
-### Running the Bot
-```bash
-python main.py --mode play --device 
-```
+## 🐛 Отладка
 
-### Analysis Mode
-```bash
-python analyze.py --log-file gameplay_data.json
-```
+### Логи
 
-## 📊 Performance Metrics
+- **Frontend**: Консоль браузера в DevTools
+- **Backend**: Терминал с запущенным FastAPI
+- **Electron**: Главный процесс в терминале
 
-The bot tracks various performance indicators:
-- Win rate progression over time
-- Average game completion time
-- Decision accuracy and response time
-- Screenshot processing efficiency
-- ADB command success rates
-- Pattern recognition confidence scores
+### Частые проблемы
 
-## 🔧 Configuration
+1. **ADB не найден**: Установите Android Platform Tools
+2. **Устройство не подключается**: Проверьте USB отладку
+3. **Backend не запускается**: Проверьте Python зависимости
+4. **Electron не собирается**: Очистите node_modules и переустановите
 
-Customize bot behavior through `config.ini`:
-```ini
-[DEVICE]
-device_id = emulator-5554
-screenshot_method = adb
-resolution = 1920x1080
+## 📝 Лицензия
 
-[GAMEPLAY]
-action_delay = 0.5
-confidence_threshold = 0.8
-max_game_duration = 300
+MIT License - см. файл LICENSE для деталей.
 
-[ANALYSIS]
-save_screenshots = true
-log_level = INFO
-data_retention_days = 30
-```
+## 🤝 Вклад в проект
 
-## 📈 Development Progress
+1. Форкните репозиторий
+2. Создайте ветку для новой функции
+3. Внесите изменения
+4. Создайте Pull Request
 
-The bot development includes:
-1. **Setup Phase**: Device connection and screenshot capture implementation
-2. **Vision Development**: Template matching and game state recognition
-3. **Automation**: Touch input simulation and game interaction
-4. **Analytics Integration**: Performance tracking and data analysis
-5. **Optimization**: Speed improvements and reliability enhancements
+## 📞 Поддержка
 
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## ⚠️ Disclaimer
-
-This bot is created for educational and research purposes. Please ensure compliance with Rush Royale's Terms of Service when using automated tools.
-
-## 🙏 Acknowledgments
-
-- **AxelBjork** for the original Rush Royale bot implementation
-- **mleem97** for improving and fixing the original codebase
-- **Frikadellental** for the AI-focused redesign and modern approach
-- Rush Royale developers for creating an engaging strategic game
-- OpenAI and DeepMind for pioneering reinforcement learning techniques
-- The open-source community for providing essential ML libraries
+Для вопросов и поддержки создайте Issue в репозитории.

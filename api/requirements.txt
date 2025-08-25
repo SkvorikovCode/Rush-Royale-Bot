@@ -1,0 +1,26 @@
+# FastAPI and ASGI server
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# Data validation and serialization
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# System monitoring and utilities
+psutil==5.9.6
+
+# Image processing for screenshots
+Pillow==10.1.0
+
+# HTTP client for external requests
+httpx==0.25.2
+
+# Async utilities
+aiofiles==23.2.1
+
+# Development dependencies (optional)
+pytest==7.4.3
+pytest-asyncio==0.21.1
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.1
