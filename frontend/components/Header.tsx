@@ -21,13 +21,13 @@ export default function Header({ title, botStatus, connectedDevices, systemInfo 
     if (window.electronAPI) {
       switch (action) {
         case 'minimize':
-          // Electron will handle this through menu
+          window.electronAPI.minimizeWindow();
           break;
         case 'maximize':
-          // Electron will handle this through menu
+          window.electronAPI.maximizeWindow();
           break;
         case 'close':
-          // Electron will handle this through menu
+          window.electronAPI.closeWindow();
           break;
       }
     }

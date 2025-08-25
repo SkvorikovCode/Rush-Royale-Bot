@@ -19,29 +19,40 @@ export default function StatusBar({ botStatus, deviceCount, systemInfo }: Status
 
   useEffect(() => {
     // Listen for system performance updates
-    if (window.electronAPI?.onSystemPerformanceStats) {
-      window.electronAPI.onSystemPerformanceStats((stats) => {
-        if (stats.cpu !== undefined && stats.memory !== undefined) {
+    if (window.electronAPI) {
+      const perfHandler = (_event: any, stats: any) => {
+        if (stats && stats.cpu !== undefined && stats.memory !== undefined) {
           setSystemStats(prev => ({
             ...prev,
             cpu: stats.cpu,
             memory: stats.memory
           }));
         }
-      });
-    }
+      };
 
-    // Listen for battery level updates
-    if (window.electronAPI?.onSystemBatteryLevel) {
-      window.electronAPI.onSystemBatteryLevel((level) => {
+      const batteryHandler = (_event: any, level: number) => {
         setSystemStats(prev => ({
           ...prev,
           battery: level
         }));
-      });
+      };
+
+      window.electronAPI.on('system:performance-stats', perfHandler);
+      window.electronAPI.on('system:battery-level', batteryHandler);
+
+      // Update time every second
+      const timeInterval = setInterval(() => {
+        setCurrentTime(new Date());
+      }, 1000);
+
+      return () => {
+        window.electronAPI.off('system:performance-stats', perfHandler);
+        window.electronAPI.off('system:battery-level', batteryHandler);
+        clearInterval(timeInterval);
+      };
     }
 
-    // Update time every second
+    // Fallback: only update time if electronAPI is not available
     const timeInterval = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);

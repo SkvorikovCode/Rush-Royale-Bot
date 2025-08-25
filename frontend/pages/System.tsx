@@ -708,7 +708,13 @@ const System: React.FC = () => {
           </button>
           
           <button
-            onClick={() => window.close()}
+            onClick={() => {
+              if (window.electronAPI?.closeWindow) {
+                window.electronAPI.closeWindow();
+              } else {
+                window.close();
+              }
+            }}
             className="flex items-center px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
           >
             <X className="w-4 h-4 mr-2" />
