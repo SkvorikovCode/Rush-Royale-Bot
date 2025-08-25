@@ -199,6 +199,25 @@ class RushRoyaleBotApp {
         isAppleSilicon: process.arch === 'arm64' && process.platform === 'darwin'
       };
     });
+
+    // Управление окном
+    ipcMain.handle('window:minimize', async () => {
+      this.mainWindow?.minimize();
+      return true;
+    });
+
+    ipcMain.handle('window:maximize', async () => {
+      const win = this.mainWindow;
+      if (win) {
+        if (win.isMaximized()) win.unmaximize(); else win.maximize();
+      }
+      return true;
+    });
+
+    ipcMain.handle('window:close', async () => {
+      this.mainWindow?.close();
+      return true;
+    });
   }
 }
 

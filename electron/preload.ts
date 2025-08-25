@@ -53,6 +53,11 @@ contextBridge.exposeInMainWorld('electronAPI', {
   showMessageBox: (options: any) => ipcRenderer.invoke('dialog:showMessageBox', options),
   showOpenDialog: (options: any) => ipcRenderer.invoke('dialog:showOpenDialog', options),
   
+  // Управление окном (macOS window controls)
+  minimizeWindow: () => ipcRenderer.invoke('window:minimize'),
+  maximizeWindow: () => ipcRenderer.invoke('window:maximize'),
+  closeWindow: () => ipcRenderer.invoke('window:close'),
+  
   // Управление ботом
   bot: {
     start: (config: any) => ipcRenderer.invoke('bot:start', config),
